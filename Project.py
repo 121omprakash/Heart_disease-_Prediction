@@ -7,7 +7,7 @@ from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
 
 # Load the dataset
-data = pd.read_csv("/home/om/Desktop/Cepta_AIML/Project/heart.csv")
+data = pd.read_csv("/workspaces/Heart_disease-_Prediction/heart.py")
 
 # Preprocessing
 categorical_data = []
