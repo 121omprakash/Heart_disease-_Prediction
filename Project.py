@@ -4,6 +4,7 @@ import pandas as pd
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
+import time  # For simulating prediction delay
 import matplotlib.pyplot as plt
 
 # Load the dataset
@@ -95,18 +96,31 @@ st.title('Heart Disease Prediction')
 # Get user input
 user_input = get_user_input()
 
+# Add a slider for setting the prediction confidence threshold
+threshold = st.slider('Set Prediction Confidence Threshold', min_value=0.0, max_value=1.0, value=0.5, step=0.05)
+
+# Add a progress bar for user feedback
+progress_bar = st.progress(0)  # Starts with 0%
+
 # Add a button for prediction
 if st.button('Predict'):
+    # Show progress bar while making the prediction
+    for i in range(100):
+        time.sleep(0.05)
+        progress_bar.progress(i + 1)
+
     # Standardize the user input for continuous columns
     user_input[continuous_columns] = scaler.transform(user_input[continuous_columns])
 
     # Make predictions
-    prediction = lr_clf.predict(user_input)
-    prediction_proba = lr_clf.predict_proba(user_input)
+    prediction_proba = lr_clf.predict_proba(user_input)  # Get probability of heart disease (class 1)
 
-    # Display the results
-    st.write('Prediction: ', 'Heart Disease' if prediction[0] == 1 else 'No Heart Disease')
-    st.write('Prediction Probability: ', prediction_proba[0])
+    # Get the class prediction based on the threshold
+    prediction_class = (prediction_proba[0][1] >= threshold).astype(int)
+
+    # Display the prediction based on threshold
+    st.write(f"Prediction (Threshold: {threshold}):", 'Heart Disease' if prediction_class == 1 else 'No Heart Disease')
+    st.write(f"Prediction Probability: {prediction_proba[0][1]:.4f} for Heart Disease")
 
     # Generate and display a simulated ECG graph
     st.write('Simulated ECG Graph:')
