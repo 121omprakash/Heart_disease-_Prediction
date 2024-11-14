@@ -121,7 +121,6 @@ if st.button('Predict'):
     plt.ylabel('Amplitude')
     st.pyplot(plt)
     for i in range(100): 
-        time.sleep(0.05) 
         progress_bar.progress(i + 1)
 
     
