@@ -96,13 +96,15 @@ st.title('Heart Disease Prediction')
 user_input = get_user_input()
 progress_bar = st.progress(0)  # Starts with 0%
 # Add a button for prediction 
-if st.button('Predict'): # Show progress bar while making the prediction 
-    for i in range(100): 
-        time.sleep(0.05) 
-        progress_bar.progress(i + 1)
+
 # Add a button for prediction
 if st.button('Predict'):
     # Standardize the user input for continuous columns
+    for i in range(100): 
+        time.sleep(0.05) 
+        progress_bar.progress(i + 1)
+
+    
     user_input[continuous_columns] = scaler.transform(user_input[continuous_columns])
 
     # Make predictions
