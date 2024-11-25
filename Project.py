@@ -145,7 +145,7 @@ if st.button('Predict'):
     else:
         st.success('No Heart Disease')
 
-    st.write(f'Prediction Probability:\nInfected: {prediction_proba[0][0]*100:.3f}%\nHealthy: {prediction_proba[0][1]*100:.3f}%')
+    st.write(f'Prediction Probability:\n Unhealthy: {prediction_proba[0][0]*100:.3f}%\nHealthy: {prediction_proba[0][1]*100:.3f}%')
 
     # Plot simulated ECG graph
     st.subheader('Simulated ECG Graph:')
