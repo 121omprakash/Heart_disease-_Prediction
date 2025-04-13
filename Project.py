@@ -160,4 +160,4 @@ if st.button('Predict'):
 
 # Add a footer
 st.markdown("---")
-st.markdown("Built with ❤️ by Om & Kaushik")
+st.markdown("Built with ❤️ by Om Prakash")
